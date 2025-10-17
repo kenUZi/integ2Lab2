@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+// Refactored: Preparing for Adapter and Bridge pattern integration
 class LegacyMediaPlayer {
     private String sourceType;
     private String fileName;
