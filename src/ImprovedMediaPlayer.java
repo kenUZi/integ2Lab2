@@ -42,7 +42,66 @@ class SoftwareRenderer implements Renderer {
     }
 }
 
+// ========== DECORATOR PATTERN ==========
+// Allows dynamic add-ons: subtitles, equalizer, watermark
+interface Player {
+    void play();
+}
 
+class BaseMediaPlayer implements Player {
+    private String fileName;
+    private Renderer renderer;
+
+    public BaseMediaPlayer(String fileName, Renderer renderer) {
+        this.fileName = fileName;
+        this.renderer = renderer;
+    }
+
+    public void play() {
+        renderer.render(fileName);
+        System.out.println("Playing " + fileName + "...");
+    }
+}
+
+abstract class PlayerDecorator implements Player {
+    protected Player decoratedPlayer;
+    public PlayerDecorator(Player player) {
+        this.decoratedPlayer = player;
+    }
+    public void play() {
+        decoratedPlayer.play();
+    }
+}
+
+class SubtitleDecorator extends PlayerDecorator {
+    public SubtitleDecorator(Player player) {
+        super(player);
+    }
+    public void play() {
+        super.play();
+        System.out.println("Subtitles enabled.");
+    }
+}
+
+class EqualizerDecorator extends PlayerDecorator {
+    public EqualizerDecorator(Player player) {
+        super(player);
+    }
+    public void play() {
+        super.play();
+        System.out.println("Equalizer effect applied.");
+    }
+}
+
+class WatermarkDecorator extends PlayerDecorator {
+    public WatermarkDecorator(Player player) {
+        super(player);
+    }
+    public void play() {
+        super.play();
+        System.out.println("Watermark applied.");
+    }
+}
 
 // ========== COMPOSITE PATTERN ==========
 // Supports nested playlists (playlist inside playlist)
