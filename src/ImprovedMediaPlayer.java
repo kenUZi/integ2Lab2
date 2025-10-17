@@ -103,41 +103,7 @@ class WatermarkDecorator extends PlayerDecorator {
     }
 }
 
-// ========== COMPOSITE PATTERN ==========
-// Supports nested playlists (playlist inside playlist)
-interface PlaylistComponent {
-    void showDetails();
-}
 
-class Song implements PlaylistComponent {
-    private String name;
-    public Song(String name) {
-        this.name = name;
-    }
-    public void showDetails() {
-        System.out.println("Song: " + name);
-    }
-}
-
-class Playlist implements PlaylistComponent {
-    private String name;
-    private List<PlaylistComponent> components = new ArrayList<>();
-
-    public Playlist(String name) {
-        this.name = name;
-    }
-
-    public void add(PlaylistComponent component) {
-        components.add(component);
-    }
-
-    public void showDetails() {
-        System.out.println("Playlist: " + name);
-        for (PlaylistComponent c : components) {
-            c.showDetails();
-        }
-    }
-}
 
 // ========== PROXY PATTERN ==========
 // Adds caching to remote streaming
