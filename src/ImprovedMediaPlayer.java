@@ -1,29 +1,5 @@
 import java.util.*;
 
-// ========== ADAPTER PATTERN ==========
-// Allows multiple media sources (Local, HLS, Remote API)
-interface MediaSource {
-    void load(String fileName);
-}
-
-class LocalFilePlayer implements MediaSource {
-    public void load(String fileName) {
-        System.out.println("Loading local file: " + fileName);
-    }
-}
-
-class HLSStreamPlayer implements MediaSource {
-    public void load(String fileName) {
-        System.out.println("Connecting to HLS stream: " + fileName);
-    }
-}
-
-class RemoteAPIPlayer implements MediaSource {
-    public void load(String fileName) {
-        System.out.println("Fetching remote media via API: " + fileName);
-    }
-}
-
 // ========== BRIDGE PATTERN ==========
 // Allows switching between hardware/software rendering
 interface Renderer {
