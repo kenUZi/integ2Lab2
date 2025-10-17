@@ -139,7 +139,33 @@ class Playlist implements PlaylistComponent {
     }
 }
 
+// ========== PROXY PATTERN ==========
+// Adds caching to remote streaming
+interface RemoteMedia {
+    void playStream(String fileName);
+}
 
+class RealRemoteMedia implements RemoteMedia {
+    public void playStream(String fileName) {
+        System.out.println("Streaming remote media: " + fileName);
+    }
+}
+
+class RemoteMediaProxy implements RemoteMedia {
+    private RealRemoteMedia realRemoteMedia;
+    private String cache;
+
+    public void playStream(String fileName) {
+        if (cache == null || !cache.equals(fileName)) {
+            System.out.println("Caching remote stream for: " + fileName);
+            realRemoteMedia = new RealRemoteMedia();
+            cache = fileName;
+        } else {
+            System.out.println("Using cached version for: " + fileName);
+        }
+        realRemoteMedia.playStream(fileName);
+    }
+}
 
 // ========== MAIN APPLICATION ==========
 public class ImprovedMediaPlayer {
