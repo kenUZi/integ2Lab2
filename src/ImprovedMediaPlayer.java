@@ -24,23 +24,7 @@ class RemoteAPIPlayer implements MediaSource {
     }
 }
 
-// ========== BRIDGE PATTERN ==========
-// Allows switching between hardware/software rendering
-interface Renderer {
-    void render(String fileName);
-}
 
-class HardwareRenderer implements Renderer {
-    public void render(String fileName) {
-        System.out.println("Rendering " + fileName + " with hardware acceleration.");
-    }
-}
-
-class SoftwareRenderer implements Renderer {
-    public void render(String fileName) {
-        System.out.println("Rendering " + fileName + " using software mode.");
-    }
-}
 
 // ========== DECORATOR PATTERN ==========
 // Allows dynamic add-ons: subtitles, equalizer, watermark
